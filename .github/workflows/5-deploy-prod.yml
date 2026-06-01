@@ -3,7 +3,7 @@ name: 5 - Deploy to Production (Vercel)
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy-prod:
