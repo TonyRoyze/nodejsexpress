@@ -1,0 +1,26 @@
+name: 3 - Auto Create PR
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          title: "Auto PR: ${{ github.ref_name }}"
+          body: |
+            Automated PR from branch `${{ github.ref_name }}`
+            - [ ] Unit tests passed
+            - [ ] Integration tests passed
+          labels: auto-pr
